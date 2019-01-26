@@ -40,7 +40,7 @@ window.states.en = {
     30: {
         situation: "You see a beaked mushroom with a strong jaw.",
         gameOver: "He bites off your handle and you die on the spot.",
-        image: "img/3-bitey.png",
+        image: "img/3-bitey.jpg",
         actions: {
             1: {
                 id: 1,
@@ -59,7 +59,7 @@ window.states.en = {
     40: {
         situation: "You see that pretty Babsi, she's winking at you.",
         gameOver: "You shouldn't have done that. She feels offended and ignores you.",
-        image: "img/4-boobies.png",
+        image: "img/4-boobies.jpg",
         actions: {
             1: {
                 id: 1,
@@ -78,7 +78,7 @@ window.states.en = {
     50: {
         situation: "You see the impressive Becky.",
         gameOver: "She doesn't find it funny and just leaves you standing.",
-        image: "img/5-glatze.png",
+        image: "img/5-glatze.jpg",
         actions: {
             1: {
                 id: 1,

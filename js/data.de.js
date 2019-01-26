@@ -40,7 +40,7 @@ window.states.de = {
     30: {
         situation: "Du siehst einen Schnabelpilz mit kräftigem Kiefer.",
         gameOver: "Er beißt Dir den Stiel ab und Du verendest an Ort und Stelle.",
-        image: "img/3-bitey.png",
+        image: "img/3-bitey.jpg",
         actions: {
             1: {
                 id: 1,
@@ -59,7 +59,7 @@ window.states.de = {
     40: {
         situation: "Du siehst die hübsche Babsi, sie zwinkert Dir zu.",
         gameOver: "Das hättest Du nicht tun sollen. Sie fühlt sich gekränkt und ignoriert Dich.",
-        image: "img/4-boobies.png",
+        image: "img/4-boobies.jpg",
         actions: {
             1: {
                 id: 1,
@@ -78,7 +78,7 @@ window.states.de = {
     50: {
         situation: "Du siehst die eindrucksvolle Becky.",
         gameOver: "Sie findet ihn nicht lustig und lässt Dich einfach stehen.",
-        image: "img/5-glatze.png",
+        image: "img/5-glatze.jpg",
         actions: {
             1: {
                 id: 1,
