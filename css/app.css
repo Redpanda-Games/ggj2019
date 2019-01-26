@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+[v-cloak] {
+    display: none;
+}
+
+@keyframes float {
+    0% {
+        box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+        transform: translateY(0px);
+    }
+    50% {
+        box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+        transform: translateY(-20px);
+    }
+    100% {
+        box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+        transform: translateY(0px);
+    }
+}
+
+body {
+    background: #000000;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* screen INTRO */
+#screen-intro {
+    cursor: pointer;
+}
+
+/* screen STATE */
+#screen-state {
+    padding-bottom: 2rem;
+}
+
+#screen-state section {
+    background: #04DB05;
+}
+
+#screen-state p {
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+#screen-state a {
+    text-align: center;
+    padding: 15px;
+    display: block;
+    border: 2px dashed #00ff00;
+}
+#screen-state a:hover {
+    text-decoration: none;
+    color: #04DB05;
+    border-style: solid;
+    border-color: #04DB05;
+}
+
+/* screen SUCCESS */
+#screen-success {
+    padding-bottom: 2rem;
+}
+
+#screen-success section {
+    background: #04DB05;
+}
+
+#screen-success p {
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+#screen-success a {
+    text-align: center;
+    padding: 15px;
+    display: block;
+    border: 2px dashed #00ff00;
+}
+#screen-success a:hover {
+    text-decoration: none;
+    color: #04DB05;
+    border-style: solid;
+    border-color: #04DB05;
+}
+
+/* screen END */
+#screen-end {
+    cursor: pointer;
+}
+
+#screen-end section {
+    background: #04DB05;
+}
+
+/* screen DEAD */
+#screen-dead {
+    cursor: pointer;
+    padding-bottom: 2rem;
+}
+
+#screen-dead img.floating {
+    transform: translateY(0px);
+    animation: float 3s ease-in-out infinite;
+}
+
+#screen-dead p {
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 3rem 0 0 0;
+}

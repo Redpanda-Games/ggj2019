@@ -1,27 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>GGJ2019</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
-<div id="ggj2019-app">
-    <div id="screen-intro" v-if="screen == 'intro'">
-        intro
+<div id="ggj2019-app" v-cloak>
+
+    <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame">
+        <div class="container">
+            <img src="img/title.png" class="img-fluid" />
+        </div>
     </div>
+
     <div id="screen-state" v-if="screen == 'state'">
-        state
+        <section>
+            <div class="container">
+                <img v-bind:src="state.image" class="img-fluid" />
+            </div>
+        </section>
+        <div class="container">
+            <p class="text-light">{{ state.situation }}</p>
+            <div class="row">
+                <div class="col col-md-6" v-for="action in state.actions">
+                    <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id"><span>{{ action.button }}</span></a>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div id="screen-success" v-if="screen == 'success'">
-        success
+        <section>
+            <div class="container">
+                <img v-bind:src="state.image" class="img-fluid" />
+            </div>
+        </section>
+        <div class="container">
+            <p class="text-light">{{ action.message }}</p>
+            <a href="#" v-on:click="nextState">continue the journey</a>
+        </div>
     </div>
-    <div id="screen-dead" v-if="screen == 'dead'">
-        dead
+
+    <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
+        <section>
+            <div class="container">
+                <img src="img/win.png" class="img-fluid" />
+            </div>
+        </section>
     </div>
+
+    <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
+        <div class="container">
+            <img src="img/you-died.png" class="img-fluid floating" />
+            <div class="text-center">
+                <img src="img/game-over.jpg" class="img-fluid" />
+            </div>
+            <p class="text-light">That wasn't nice, the fly hadn't done anything bad. The mushroom ignores you. You die alone.</p>
+        </div>
+    </div>
+
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5/dist/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
