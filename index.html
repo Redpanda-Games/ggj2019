@@ -31,13 +31,11 @@
 
     <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame">
         <div class="container">
-            <h1 class="clearfix">
-                <div class="text-center">Take Shroomi</div>
-                <div class="text-center">Home</div>
-            </h1>
-
-            <p>A game by Tom Witkowski & Norman von Rechenberg</p>
-            <img src="img/chara-idle-green.gif" class="float-right" />
+            <div class="text-center">
+                <h1>Bring Shroomi Home</h1>
+                <img src="img/chara-idle.gif" class="my-5"/>
+            </div>
+            <p class="text-light text-right m-0">Tom Witkowski<br/>Norman von Rechenberg</p>
         </div>
     </div>
 
@@ -57,7 +55,7 @@
         <div class="container">
             <h2 class="floating">the journey continues</h2>
             <div class="text-center">
-                <img src="img/chara-continue-green.gif" class="img-fluid pixelate" />
+                <img src="img/chara-continue.gif" class="img-fluid pixelate" />
             </div>
             <p class="text-dark">{{ action.message }}</p>
         </div>
@@ -65,14 +63,14 @@
 
     <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
         <p class="text-dark">{{ endMessage }}</p>
-        <img src="img/win.jpg" />
+        <slide-img src="img/win.jpg" duration="10" fps="30"></slide-img>
     </div>
 
     <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
         <div class="container">
             <h2 class="floating">you died</h2>
             <div class="text-center">
-                <img src="img/game-over.jpg" class="img-fluid" />
+                <img src="img/game-over.png" class="img-fluid" />
             </div>
             <p class="text-dark">{{ state.gameOver }}</p>
         </div>
