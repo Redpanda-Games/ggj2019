@@ -140,6 +140,12 @@ document.addEventListener('images-loaded', function() {
                     return this.state.actions[this.actionIndex];
                 }
             },
+            transitionStateKey: function() {
+                return 'state-' + this.stateIndex;
+            },
+            transitionSuccessKey: function() {
+                return 'success-' + this.stateIndex;
+            },
             gameOverTitle: function() {
                 return {
                     de: 'die Reise geht weiter',
