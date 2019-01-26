@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine:400,700,700i|Special+Elite');
+@import url('https://fonts.googleapis.com/css?family=Cousine:700,700i|Special+Elite|Oswald:700');
 
 [v-cloak] {
     display: none;
@@ -26,26 +26,9 @@ img.pixelate {
     }
 }
 
-@keyframes float-x {
-    0% {
-        transform: translateX(-50%);
-    }
-    25% {
-        transform: translateX(-55%);
-    }
-    50% {
-        transform: translateX(-50%);
-    }
-    75% {
-        transform: translateX(-45%);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
 body {
     font-family: 'Cousine', monospace;
+    font-weight: 700;
 }
 
 #ggj2019-app {
@@ -147,12 +130,12 @@ a.button:hover {
 }
 
 #screen-intro h1 {
-    font-size: 6rem;
     margin: 0;
     padding: 0;
-    /*text-transform: uppercase;*/
-    font-family: 'Special Elite', serif;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
     font-size: 5rem;
+    color: #ffffff;
 }
 
 /* screen STATE */
@@ -202,12 +185,8 @@ a.button:hover {
     z-index: 1000;
 }
 
-#screen-end img {
+#screen-end .slide-img {
     height: 100vh;
-    transform: translateX(-50%);
-    left: 50%;
-    position: relative;
-    animation: float-x 10s linear infinite;
 }
 
 /* screen DEAD */
