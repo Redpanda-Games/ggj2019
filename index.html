@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GGJ2019</title>
+</head>
+<body>
+
+<div id="ggj2019-app">
+    <div id="screen-intro" v-if="screen == 'intro'">
+        intro
+    </div>
+    <div id="screen-state" v-if="screen == 'state'">
+        state
+    </div>
+    <div id="screen-success" v-if="screen == 'success'">
+        success
+    </div>
+    <div id="screen-dead" v-if="screen == 'dead'">
+        dead
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5/dist/vue.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
