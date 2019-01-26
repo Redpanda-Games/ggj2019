@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css?v=3">
-    <link rel="stylesheet" href="css/app.css?v=3">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=4">
+    <link rel="stylesheet" href="css/app.css?v=4">
 </head>
 <body>
 
@@ -53,7 +53,7 @@
 
     <div id="screen-success" v-if="screen == 'success'" v-on:click="nextState">
         <div class="container">
-            <h2 class="floating">the journey continues</h2>
+            <h2 class="text-light">the journey continues</h2>
             <div class="text-center">
                 <img src="img/chara-continue.gif" class="img-fluid pixelate" />
             </div>
@@ -68,7 +68,7 @@
 
     <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
         <div class="container">
-            <h2 class="floating">you died</h2>
+            <h2>you died</h2>
             <div class="text-center">
                 <img src="img/game-over.png" class="img-fluid" />
             </div>
@@ -79,9 +79,9 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/firefly.js?v=3"></script>
-<script src="js/app.js?v=3"></script>
-<script src="js/data.en.js?v=3"></script>
-<script src="js/data.de.js?v=3"></script>
+<script src="js/firefly.js?v=4"></script>
+<script src="js/app.js?v=4"></script>
+<script src="js/data.en.js?v=4"></script>
+<script src="js/data.de.js?v=4"></script>
 </body>
 </html>

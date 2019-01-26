@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine:700,700i|Special+Elite|Oswald:700');
+@import url('https://fonts.googleapis.com/css?family=Cousine:700,700i|Oswald:700');
 
 [v-cloak] {
     display: none;
@@ -14,18 +14,6 @@ img.pixelate {
     -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
 }
 
-@keyframes float-y {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
 body {
     font-family: 'Cousine', monospace;
     font-weight: 700;
@@ -37,11 +25,6 @@ body {
     background-size: cover;
     min-height: 100vh;
     min-width: 100vw;
-}
-
-.floating {
-    transform: translateY(0px);
-    animation: float-y 3s ease-in-out infinite;
 }
 
 a.button {
@@ -118,8 +101,8 @@ a.button:hover {
     font-size: 4rem;
     margin: 0;
     padding: 2rem 0;
-    text-transform: capitalize;
-    font-family: 'Special Elite', serif;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
 }
 
 /* screen INTRO */
@@ -141,10 +124,6 @@ a.button:hover {
 /* screen STATE */
 #screen-state {
     padding-bottom: 2rem;
-}
-
-#screen-state section {
-    /*background: #04DB05;*/
 }
 
 #screen-state p {
