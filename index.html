@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div id="ggj2019-app" v-cloak>
+<div id="ggj2019-app" class="clearfix" v-cloak>
 
     <div id="toolbar">
         <ul class="list-inline">
@@ -27,10 +27,17 @@
         </ul>
     </div>
 
+    <fireflies></fireflies>
+
     <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame">
-        <fireflies></fireflies>
         <div class="container">
-            <img src="img/title.png" class="img-fluid" />
+            <h1 class="clearfix">
+                <div class="text-center">Take Shroomi</div>
+                <div class="text-center">Home</div>
+            </h1>
+
+            <p>A game by Tom Witkowski & Norman von Rechenberg</p>
+            <img src="img/chara-idle-green.gif" class="float-right" />
         </div>
     </div>
 
@@ -48,7 +55,7 @@
 
     <div id="screen-success" v-if="screen == 'success'" v-on:click="nextState">
         <div class="container">
-            <img src="img/continue.png" class="img-fluid floating" />
+            <h2 class="floating">the journey continues</h2>
             <div class="text-center">
                 <img src="img/chara-continue-green.gif" class="img-fluid pixelate" />
             </div>
@@ -58,12 +65,12 @@
 
     <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
         <p class="text-dark">{{ endMessage }}</p>
-        <img src="img/win.png" />
+        <img src="img/win.jpg" />
     </div>
 
     <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
         <div class="container">
-            <img src="img/you-died.png" class="img-fluid floating" />
+            <h2 class="floating">you died</h2>
             <div class="text-center">
                 <img src="img/game-over.jpg" class="img-fluid" />
             </div>

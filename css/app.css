@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Cousine:400,700,700i|Special+Elite');
 
 [v-cloak] {
     display: none;
@@ -56,7 +56,7 @@ body {
     min-width: 100vw;
 }
 
-img.floating {
+.floating {
     transform: translateY(0px);
     animation: float-y 3s ease-in-out infinite;
 }
@@ -81,7 +81,6 @@ a.button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
 }
 
 #toolbar {
@@ -124,9 +123,36 @@ a.button:hover {
     background-image: url(../img/fullscreen.svg);
 }
 
+[id^=screen-] {
+    position: relative;
+    z-index: 100;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+[id^=screen-] h2 {
+    text-align: center;
+    font-size: 4rem;
+    margin: 0;
+    padding: 2rem 0;
+    text-transform: capitalize;
+    font-family: 'Special Elite', serif;
+}
+
 /* screen INTRO */
 #screen-intro {
     cursor: pointer;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+#screen-intro h1 {
+    font-size: 6rem;
+    margin: 0;
+    padding: 0;
+    /*text-transform: uppercase;*/
+    font-family: 'Special Elite', serif;
+    font-size: 5rem;
 }
 
 /* screen STATE */
@@ -147,8 +173,9 @@ a.button:hover {
 
 /* screen SUCCESS */
 #screen-success {
-    padding-bottom: 2rem;
     cursor: pointer;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 #screen-success p {
@@ -186,6 +213,7 @@ a.button:hover {
 /* screen DEAD */
 #screen-dead {
     cursor: pointer;
+    padding-top: 2rem;
     padding-bottom: 2rem;
 }
 

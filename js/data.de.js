@@ -2,7 +2,7 @@ window.states.de = {
     10: {
         situation: "Gerade ist eine Fliege auf dem Hut des Pilzes gelandet. \"Hallo Freundchen!\" Ruft er entzückt.",
         gameOver: "Das war nicht nett, die Fliege hatte nichts böses getan. Der Pilz ignoriert Dich. Du stirbst allein.",
-        image: "img/1-fly.jpg",
+        image: "img/1-fly.png",
         actions: {
             1: {
                 id: 1,
@@ -40,7 +40,7 @@ window.states.de = {
     30: {
         situation: "Du siehst einen Schnabelpilz mit kräftigem Kiefer.",
         gameOver: "Er beißt Dir den Stiel ab und Du verendest an Ort und Stelle.",
-        image: "img/3-bitey.jpg",
+        image: "img/3-bitey.png",
         actions: {
             1: {
                 id: 1,
@@ -59,7 +59,7 @@ window.states.de = {
     40: {
         situation: "Du siehst die hübsche Babsi, sie zwinkert Dir zu.",
         gameOver: "Das hättest Du nicht tun sollen. Sie fühlt sich gekränkt und ignoriert Dich.",
-        image: "img/4-boobies.jpg",
+        image: "img/4-boobies.png",
         actions: {
             1: {
                 id: 1,
@@ -78,7 +78,7 @@ window.states.de = {
     50: {
         situation: "Du siehst die eindrucksvolle Becky.",
         gameOver: "Sie findet ihn nicht lustig und lässt Dich einfach stehen.",
-        image: "img/5-glatze.jpg",
+        image: "img/5-glatze.png",
         actions: {
             1: {
                 id: 1,

@@ -21,22 +21,23 @@ window.addEventListener('load', function() {
 
     preloadImages([
         // states
-        'img/1-fly.jpg',
+        'img/1-fly.png',
         'img/2-snail.png',
-        'img/3-bitey.jpg',
-        'img/4-boobies.jpg',
-        'img/5-glatze.jpg',
+        'img/3-bitey.png',
+        'img/4-boobies.png',
+        'img/5-glatze.png',
+        'img/6-old-grandpa.png',
+        'img/7-lady.png',
+        'img/8-mario.png',
 
         // char
         'img/chara-continue-green.gif',
         'img/chara-idle-green.gif',
 
         // assets
-        'img/continue.png',
         'img/game-over.jpg',
         'img/title.png',
-        'img/win.png',
-        'img/you-died.png',
+        'img/win.jpg',
 
         // flags
         'img/flag-de.png',

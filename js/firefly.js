@@ -9,7 +9,7 @@ window.FIREFLIES = function (canvas) {
     canvas.style.width = WIDTH + 'px';
     canvas.style.height = HEIGHT + 'px';
     con = canvas.getContext('2d');
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
         pxs[i] = new Circle();
         pxs[i].reset();
     }
@@ -37,7 +37,12 @@ window.FIREFLIES = function (canvas) {
             xdrift: 4,
             ydrift: 4,
             random: true,
-            blink: true
+            blink: true,
+            color: {
+                r: 255,
+                g: Math.max(128, 255 * Math.random()),
+                b: 128 * Math.random(),
+            }
         };
 
         this.reset = function () {
@@ -67,9 +72,9 @@ window.FIREFLIES = function (canvas) {
             con.closePath();
             let cr = this.r * newo;
             g = con.createRadialGradient(this.x, this.y, 0, this.x, this.y, (cr <= 0 ? 1 : cr));
-            g.addColorStop(0.0, 'rgba(238,180,28,' + newo + ')');
-            g.addColorStop(this.stop, 'rgba(238,180,28,' + (newo * .2) + ')');
-            g.addColorStop(1.0, 'rgba(238,180,28,0)');
+            g.addColorStop(0.0, 'rgba('+this.s.color.r+','+this.s.color.g+','+this.s.color.b+',' + newo + ')');
+            g.addColorStop(this.stop, 'rgba('+this.s.color.r+','+this.s.color.g+','+this.s.color.b+',' + (newo * .2) + ')');
+            g.addColorStop(1.0, 'rgba('+this.s.color.r+','+this.s.color.g+','+this.s.color.b+',0)');
             con.fillStyle = g;
             con.fill();
         };
