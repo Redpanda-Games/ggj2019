@@ -17,12 +17,24 @@ img.pixelate {
 body {
     font-family: 'Cousine', monospace;
     font-weight: 700;
+    color: #000000;
+    overflow-x: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s ease-in;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
 }
 
 #ggj2019-app {
     background: url(../img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 100vh;
     min-width: 100vw;
 }
@@ -123,6 +135,7 @@ a.button:hover {
 
 /* screen STATE */
 #screen-state {
+    padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
