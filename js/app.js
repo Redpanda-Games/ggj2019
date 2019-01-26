@@ -20,8 +20,27 @@ window.addEventListener('load', function() {
     }
 
     preloadImages([
+        // states
         'img/1-fly.jpg',
-        'img/2-snail.png'
+        'img/2-snail.png',
+        'img/3-bitey.png',
+        'img/4-boobies.png',
+        'img/5-glatze.png',
+
+        // char
+        'img/chara-continue-green.gif',
+        'img/chara-idle-green.gif',
+
+        // assets
+        'img/continue.png',
+        'img/game-over.jpg',
+        'img/title.png',
+        'img/win.png',
+        'img/you-died.png',
+
+        // flags
+        'img/flag-de.png',
+        'img/flag-gb.png',
     ], function() {
         document.dispatchEvent(new CustomEvent("images-loaded"));
     });
