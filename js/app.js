@@ -1,12 +1,59 @@
-Array.prototype.max = function() {
-    return Math.max.apply(null, this);
-};
-
-Array.prototype.min = function() {
-    return Math.min.apply(null, this);
-};
+window.states = {};
 
 window.addEventListener('load', function() {
+    function preloadImages(urls, allImagesLoadedCallback){
+        let loadedCounter = 0;
+        let toBeLoadedNumber = urls.length;
+        urls.forEach(function(url){
+            preloadImage(url, function(){
+                loadedCounter++;
+                if(loadedCounter === toBeLoadedNumber){
+                    allImagesLoadedCallback();
+                }
+            });
+        });
+        function preloadImage(url, anImageLoadedCallback){
+            let img = new Image();
+            img.onload = anImageLoadedCallback;
+            img.src = url;
+        }
+    }
+
+    preloadImages([
+        // states
+        'img/1-fly.jpg',
+        'img/2-snail.png',
+        'img/3-bitey.png',
+        'img/4-boobies.png',
+        'img/5-glatze.png',
+
+        // char
+        'img/chara-continue-green.gif',
+        'img/chara-idle-green.gif',
+
+        // assets
+        'img/continue.png',
+        'img/game-over.jpg',
+        'img/title.png',
+        'img/win.png',
+        'img/you-died.png',
+
+        // flags
+        'img/flag-de.png',
+        'img/flag-gb.png',
+    ], function() {
+        document.dispatchEvent(new CustomEvent("images-loaded"));
+    });
+});
+
+document.addEventListener('images-loaded', function() {
+    Vue.component('fireflies', {
+        template: '<canvas id="fireflies"></canvas>',
+        mounted: function () {
+            window.FIREFLIES(this.$el);
+        }
+    });
+
     window.game = new Vue({
         el: '#ggj2019-app',
         data: {
@@ -14,44 +61,7 @@ window.addEventListener('load', function() {
             isEnd: false,
             stateIndex: null,
             actionIndex: null,
-            states: {
-                10: {
-                    situation: "A fly just landed on the mushroom's hat. \"Hello little friend!\" He calls delighted.",
-                    image: "img/1-fly.jpg",
-                    actions: {
-                        1: {
-                            id: 1,
-                            button: "Make a fly noise",
-                            success: true,
-                            message: "The fly follows you as a friend. The mushroom is happy about such an animal friend and shows you the way.",
-                            next: 20,
-                        },
-                        2: {
-                            id: 2,
-                            button: "Scare the fly away",
-                            success: false,
-                        },
-                    }
-                },
-                20: {
-                    situation: "You see a disgusted fungus that's beside itself. The snail really slimes it up!",
-                    image: "img/2-snail.png",
-                    actions: {
-                        1: {
-                            id: 1,
-                            button: "Lay a trail with snail food that leads away from the mushroom",
-                            success: true,
-                            message: "Together you watch the sticky snail crawl away. That looks pretty funny. The mushroom helps you.",
-                            next: true,
-                        },
-                        2: {
-                            id: 2,
-                            button: "Sprinkle some salt on the snail",
-                            success: false,
-                        },
-                    }
-                },
-            }
+            locale: 'en',
         },
         computed: {
             screen: function() {
@@ -67,6 +77,9 @@ window.addEventListener('load', function() {
                     return 'success';
                 }
             },
+            states: function() {
+                return window.states[this.locale];
+            },
             state: function() {
                 return this.states[this.stateIndex];
             },
@@ -74,6 +87,12 @@ window.addEventListener('load', function() {
                 if(this.actionIndex) {
                     return this.state.actions[this.actionIndex];
                 }
+            },
+            endMessage: function () {
+                return {
+                    de: 'Willkommen zu Hause',
+                    en: 'Welcome Home',
+                }[this.locale];
             },
         },
         methods: {
@@ -111,6 +130,20 @@ window.addEventListener('load', function() {
 
                 this.actionIndex = null;
             },
+            setLocale: function (event) {
+                this.locale = event.target.dataset.locale;
+            },
+            toggleFullScreen: function(event) {
+                if (!document.fullscreenElement) {
+                    this.$el.requestFullscreen();
+                    event.target.classList.add('active');
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                        event.target.classList.remove('active');
+                    }
+                }
+            }
         }
     });
 }, false);

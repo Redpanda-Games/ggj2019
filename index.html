@@ -13,7 +13,22 @@
 
 <div id="ggj2019-app" v-cloak>
 
+    <div id="toolbar">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <img src="img/flag-de.png" v-on:click="setLocale" data-locale="de" />
+            </li>
+            <li class="list-inline-item">
+                <img src="img/flag-gb.png" v-on:click="setLocale" data-locale="en" />
+            </li>
+            <li class="list-inline-item">
+                <span class="full-screen" v-on:click="toggleFullScreen"></span>
+            </li>
+        </ul>
+    </div>
+
     <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame">
+        <fireflies></fireflies>
         <div class="container">
             <img src="img/title.png" class="img-fluid" />
         </div>
@@ -28,30 +43,27 @@
         <div class="container">
             <p class="text-light">{{ state.situation }}</p>
             <div class="row">
-                <div class="col col-md-6" v-for="action in state.actions">
-                    <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id"><span>{{ action.button }}</span></a>
+                <div class="col-12 col-md-6" v-for="action in state.actions">
+                    <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id" class="mb-3 mb-md-0"><span>{{ action.button }}</span></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="screen-success" v-if="screen == 'success'">
-        <section>
-            <div class="container">
-                <img v-bind:src="state.image" class="img-fluid" />
-            </div>
-        </section>
+    <div id="screen-success" v-if="screen == 'success'" v-on:click="nextState">
         <div class="container">
+            <img src="img/continue.png" class="img-fluid floating" />
+            <div class="text-center">
+                <img src="img/chara-continue-green.gif" class="img-fluid pixelate" />
+            </div>
             <p class="text-light">{{ action.message }}</p>
-            <a href="#" v-on:click="nextState">continue the journey</a>
         </div>
     </div>
 
     <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
         <section>
-            <div class="container">
-                <img src="img/win.png" class="img-fluid" />
-            </div>
+            <p class="text-light">{{ endMessage }}</p>
+            <img src="img/win.png" />
         </section>
     </div>
 
@@ -61,13 +73,16 @@
             <div class="text-center">
                 <img src="img/game-over.jpg" class="img-fluid" />
             </div>
-            <p class="text-light">That wasn't nice, the fly hadn't done anything bad. The mushroom ignores you. You die alone.</p>
+            <p class="text-light">{{ state.gameOver }}</p>
         </div>
     </div>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
+<script src="js/firefly.js"></script>
 <script src="js/app.js"></script>
+<script src="js/data.en.js"></script>
+<script src="js/data.de.js"></script>
 </body>
 </html>
