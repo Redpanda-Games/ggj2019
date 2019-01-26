@@ -140,7 +140,13 @@ document.addEventListener('images-loaded', function() {
                     return this.state.actions[this.actionIndex];
                 }
             },
-            endMessage: function () {
+            gameOverTitle: function() {
+                return {
+                    de: 'die Reise geht weiter',
+                    en: 'the journey continues',
+                }[this.locale];
+            },
+            endTitle: function () {
                 return {
                     de: 'Willkommen zu Hause',
                     en: 'Welcome Home',

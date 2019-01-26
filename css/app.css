@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine:700,700i|Special+Elite|Oswald:700');
+@import url('https://fonts.googleapis.com/css?family=Cousine:700,700i|Oswald:700');
 
 [v-cloak] {
     display: none;
@@ -14,34 +14,29 @@ img.pixelate {
     -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
 }
 
-@keyframes float-y {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
 body {
     font-family: 'Cousine', monospace;
     font-weight: 700;
+    color: #000000;
+    overflow-x: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s ease-in;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
 }
 
 #ggj2019-app {
     background: url(../img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 100vh;
     min-width: 100vw;
-}
-
-.floating {
-    transform: translateY(0px);
-    animation: float-y 3s ease-in-out infinite;
 }
 
 a.button {
@@ -118,8 +113,8 @@ a.button:hover {
     font-size: 4rem;
     margin: 0;
     padding: 2rem 0;
-    text-transform: capitalize;
-    font-family: 'Special Elite', serif;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
 }
 
 /* screen INTRO */
@@ -140,11 +135,8 @@ a.button:hover {
 
 /* screen STATE */
 #screen-state {
+    padding-top: 2rem;
     padding-bottom: 2rem;
-}
-
-#screen-state section {
-    /*background: #04DB05;*/
 }
 
 #screen-state p {

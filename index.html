@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css?v=3">
-    <link rel="stylesheet" href="css/app.css?v=3">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=4">
+    <link rel="stylesheet" href="css/app.css?v=4">
 </head>
 <body>
 
@@ -29,6 +29,8 @@
 
     <fireflies></fireflies>
 
+
+    <transition name="fade">
     <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame">
         <div class="container">
             <div class="text-center">
@@ -38,7 +40,9 @@
             <p class="text-light text-right m-0">Tom Witkowski<br/>Norman von Rechenberg</p>
         </div>
     </div>
+    </transition>
 
+    <transition name="fade">
     <div id="screen-state" v-if="screen == 'state'">
         <div class="container">
             <img v-bind:src="state.image" class="img-fluid" />
@@ -50,38 +54,45 @@
             </div>
         </div>
     </div>
+    </transition>
 
+    <transition name="fade">
     <div id="screen-success" v-if="screen == 'success'" v-on:click="nextState">
         <div class="container">
-            <h2 class="floating">the journey continues</h2>
+            <h2 class="text-light">{{ gameOverTitle }}</h2>
             <div class="text-center">
-                <img src="img/chara-continue.gif" class="img-fluid pixelate" />
+                <img src="img/chara-continue.gif" class="img-fluid pixelate my-5" />
             </div>
-            <p class="text-dark">{{ action.message }}</p>
+            <p class="text-light">{{ action.message }}</p>
         </div>
     </div>
+    </transition>
 
+    <transition name="fade">
     <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
-        <p class="text-dark">{{ endMessage }}</p>
+        <p class="text-dark">{{ endTitle }}</p>
         <slide-img src="img/win.jpg" duration="10" fps="30"></slide-img>
     </div>
+    </transition>
 
+    <transition name="fade">
     <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
         <div class="container">
-            <h2 class="floating">you died</h2>
+            <h2>you died</h2>
             <div class="text-center">
                 <img src="img/game-over.png" class="img-fluid" />
             </div>
             <p class="text-dark">{{ state.gameOver }}</p>
         </div>
     </div>
+    </transition>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/firefly.js?v=3"></script>
-<script src="js/app.js?v=3"></script>
-<script src="js/data.en.js?v=3"></script>
-<script src="js/data.de.js?v=3"></script>
+<script src="js/firefly.js?v=4"></script>
+<script src="js/app.js?v=4"></script>
+<script src="js/data.en.js?v=4"></script>
+<script src="js/data.de.js?v=4"></script>
 </body>
 </html>
