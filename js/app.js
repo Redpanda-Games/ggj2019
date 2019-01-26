@@ -23,9 +23,9 @@ window.addEventListener('load', function() {
         // states
         'img/1-fly.jpg',
         'img/2-snail.png',
-        'img/3-bitey.png',
-        'img/4-boobies.png',
-        'img/5-glatze.png',
+        'img/3-bitey.jpg',
+        'img/4-boobies.jpg',
+        'img/5-glatze.jpg',
 
         // char
         'img/chara-continue-green.gif',

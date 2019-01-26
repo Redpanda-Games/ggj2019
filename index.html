@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=3">
+    <link rel="stylesheet" href="css/app.css?v=3">
 </head>
 <body>
 
@@ -35,16 +35,12 @@
     </div>
 
     <div id="screen-state" v-if="screen == 'state'">
-        <section>
-            <div class="container">
-                <img v-bind:src="state.image" class="img-fluid" />
-            </div>
-        </section>
         <div class="container">
-            <p class="text-light">{{ state.situation }}</p>
+            <img v-bind:src="state.image" class="img-fluid" />
+            <p class="text-dark">{{ state.situation }}</p>
             <div class="row">
                 <div class="col-12 col-md-6" v-for="action in state.actions">
-                    <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id" class="mb-3 mb-md-0"><span>{{ action.button }}</span></a>
+                    <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id" class="mb-3 mb-md-0 button">{{ action.button }}</a>
                 </div>
             </div>
         </div>
@@ -56,15 +52,13 @@
             <div class="text-center">
                 <img src="img/chara-continue-green.gif" class="img-fluid pixelate" />
             </div>
-            <p class="text-light">{{ action.message }}</p>
+            <p class="text-dark">{{ action.message }}</p>
         </div>
     </div>
 
     <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame">
-        <section>
-            <p class="text-light">{{ endMessage }}</p>
-            <img src="img/win.png" />
-        </section>
+        <p class="text-dark">{{ endMessage }}</p>
+        <img src="img/win.png" />
     </div>
 
     <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame">
@@ -73,16 +67,16 @@
             <div class="text-center">
                 <img src="img/game-over.jpg" class="img-fluid" />
             </div>
-            <p class="text-light">{{ state.gameOver }}</p>
+            <p class="text-dark">{{ state.gameOver }}</p>
         </div>
     </div>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/firefly.js"></script>
-<script src="js/app.js"></script>
-<script src="js/data.en.js"></script>
-<script src="js/data.de.js"></script>
+<script src="js/firefly.js?v=3"></script>
+<script src="js/app.js?v=3"></script>
+<script src="js/data.en.js?v=3"></script>
+<script src="js/data.de.js?v=3"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+@import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700,700i');
 
 [v-cloak] {
     display: none;
@@ -45,13 +45,34 @@ img.pixelate {
 }
 
 body {
-    background: #000000;
-    font-family: 'Cutive Mono', monospace;
+    font-family: 'Cousine', monospace;
+}
+
+#ggj2019-app {
+    background: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 
 img.floating {
     transform: translateY(0px);
     animation: float-y 3s ease-in-out infinite;
+}
+
+a.button {
+    text-align: center;
+    padding: 15px;
+    display: block;
+    border: 2px dashed #000000;
+    font-weight: 700;
+}
+a.button:hover {
+    text-decoration: none;
+    color: #000000;
+    border-style: solid;
+    font-style: italic;
 }
 
 #fireflies {
@@ -60,7 +81,7 @@ img.floating {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9999;
+    z-index: 1000;
 }
 
 #toolbar {
@@ -69,6 +90,7 @@ img.floating {
     left: 0;
     right: 0;
     padding: 5px 15px;
+    z-index: 9999;
 }
 
 #toolbar ul {
@@ -123,27 +145,10 @@ img.floating {
     margin: 1.5rem 0;
 }
 
-#screen-state a {
-    text-align: center;
-    padding: 15px;
-    display: block;
-    border: 2px dashed #00ff00;
-}
-#screen-state a:hover {
-    text-decoration: none;
-    color: #04DB05;
-    border-style: solid;
-    border-color: #04DB05;
-}
-
 /* screen SUCCESS */
 #screen-success {
     padding-bottom: 2rem;
     cursor: pointer;
-}
-
-#screen-success section {
-    background: #04DB05;
 }
 
 #screen-success p {
@@ -153,29 +158,12 @@ img.floating {
     margin: 1.5rem 0;
 }
 
-#screen-success a {
-    text-align: center;
-    padding: 15px;
-    display: block;
-    border: 2px dashed #00ff00;
-}
-#screen-success a:hover {
-    text-decoration: none;
-    color: #04DB05;
-    border-style: solid;
-    border-color: #04DB05;
-}
-
 /* screen END */
 #screen-end {
     cursor: pointer;
 }
 
-#screen-end section {
-    background: #04DB05;
-}
-
-#screen-end section p {
+#screen-end p {
     text-align: center;
     font-size: 2rem;
     padding: 0;
@@ -184,7 +172,7 @@ img.floating {
     top: 15px;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 1000;
 }
 
 #screen-end img {
