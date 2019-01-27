@@ -1,15 +1,33 @@
+let shuffleArray = function (array) {
+    let currentIndex = array.length;
+    let temporaryValue;
+    let randomIndex;
+
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+};
+
 window.intros = {};
 window.states = {};
 window.audios = {};
+window.sfxs = {};
 
 window.addEventListener('load', function () {
     let preloaded = {
-        audio: false,
         image: false,
+        audio: false,
+        sfxs: false,
     };
 
     function allPreloaded() {
-        if(preloaded.audio && preloaded.image) {
+        if (preloaded.sfxs && preloaded.audio && preloaded.image) {
             document.dispatchEvent(new CustomEvent("preloaded"));
         }
     }
@@ -49,12 +67,40 @@ window.addEventListener('load', function () {
 
         function preloadAudio(url, key, callback) {
             let audio = new Audio();
-            if(!window.SmartPhone.isAny()) {
+            if (!window.SmartPhone.isAny()) {
                 audio.oncanplaythrough = callback;
             }
             audio.src = url;
+            audio.muted = false;
             window.audios[key] = audio;
-            if(window.SmartPhone.isAny()) {
+            if (window.SmartPhone.isAny()) {
+                callback();
+            }
+        }
+    }
+
+    function preloadSfxs(urls) {
+        let loadedCounter = 0;
+        let toBeLoadedNumber = Object.keys(urls).length;
+        Object.keys(urls).forEach(function (key) {
+            preloadSfx(urls[key], key, function () {
+                loadedCounter++;
+                if (loadedCounter === toBeLoadedNumber) {
+                    preloaded.sfxs = true;
+                    allPreloaded();
+                }
+            });
+        });
+
+        function preloadSfx(url, key, callback) {
+            let audio = new Audio();
+            if (!window.SmartPhone.isAny()) {
+                audio.oncanplaythrough = callback;
+            }
+            audio.src = url;
+            audio.muted = false;
+            window.sfxs[key] = audio;
+            if (window.SmartPhone.isAny()) {
                 callback();
             }
         }
@@ -76,6 +122,8 @@ window.addEventListener('load', function () {
         // char
         'img/chara-continue.gif',
         'img/chara-idle.gif',
+        'img/chara-herz.gif',
+        'img/chara-afraid.gif',
 
         // assets
         'img/game-over.png',
@@ -93,6 +141,7 @@ window.addEventListener('load', function () {
         intro: 'audio/intro.mp3',
         win: 'audio/win.mp3',
         dead: 'audio/dead.mp3',
+        end: 'audio/end.mp3',
 
         // states
         state10: 'audio/1-fly.mp3',
@@ -106,6 +155,11 @@ window.addEventListener('load', function () {
         state90: 'audio/9-partyshroom.mp3',
         state300: 'audio/30-grandpa.mp3',
     });
+
+    preloadSfxs({
+        continue: 'audio/continue.mp3',
+        gameOver: 'audio/game-over.mp3',
+    });
 });
 
 document.addEventListener('preloaded', function () {
@@ -115,6 +169,7 @@ document.addEventListener('preloaded', function () {
             isDead: false,
             isWin: false,
             isWelcome: false,
+            isEnd: false,
             introIndex: null,
             stateIndex: null,
             actionIndex: null,
@@ -126,6 +181,8 @@ document.addEventListener('preloaded', function () {
                     return 'win';
                 } else if (this.isWelcome) {
                     return 'welcome';
+                } else if (this.isEnd) {
+                    return 'end';
                 } else if (this.isDead) {
                     return 'dead';
                 } else if (this.introIndex === null && this.stateIndex === null) {
@@ -151,6 +208,9 @@ document.addEventListener('preloaded', function () {
             },
             state: function () {
                 return this.states[this.stateIndex];
+            },
+            actions: function () {
+                return shuffleArray(Object.values(this.state.actions));
             },
             action: function () {
                 if (this.actionIndex) {
@@ -184,11 +244,18 @@ document.addEventListener('preloaded', function () {
                     en: 'Welcome Home',
                 }[this.locale];
             },
+            endMessage: function () {
+                return {
+                    de: 'Danke für deine Zeit!',
+                    en: 'Thank you for playing!',
+                }[this.locale];
+            },
         },
         methods: {
             resetGame: function () {
                 this.isWin = false;
                 this.isWelcome = false;
+                this.isEnd = false;
                 this.isDead = false;
                 this.introIndex = null;
                 this.stateIndex = null;
@@ -197,6 +264,10 @@ document.addEventListener('preloaded', function () {
             toWelcome: function () {
                 this.resetGame();
                 this.isWelcome = true;
+            },
+            toEnd: function () {
+                this.resetGame();
+                this.isEnd = true;
             },
             toSuspiciousGrandpa: function () {
                 this.resetGame();
@@ -225,10 +296,11 @@ document.addEventListener('preloaded', function () {
 
                 if (!this.action.success) {
                     this.isDead = true;
-                }
-
-                if(this.action.next === null) {
-                    this.resetGame();
+                    window.sfxs.gameOver.play();
+                } else if (this.action.next === null) {
+                    this.toEnd();
+                } else {
+                    window.sfxs.continue.play();
                 }
             },
             nextState: function () {
@@ -257,38 +329,51 @@ document.addEventListener('preloaded', function () {
                 }
             },
             stopAllAudioExcept: function (toPlay) {
-                Object.keys(window.audios).forEach(function(key) {
-                    if(key !== toPlay) {
+                Object.keys(window.audios).forEach(function (key) {
+                    if (key !== toPlay) {
                         let audio = window.audios[key];
                         audio.pause();
                         audio.currentTime = 0;
                     }
                 });
+            },
+            toggleMute: function (event) {
+                Object.values(window.audios).forEach(function (audio) {
+                    audio.muted = !audio.muted;
+                });
+                Object.values(window.sfxs).forEach(function (audio) {
+                    audio.muted = !audio.muted;
+                });
+                event.target.classList.toggle('active');
             }
         },
         watch: {
             screen: function (newValue, oldValue) {
-                if(newValue === 'title') {
+                if (newValue === 'title') {
                     this.stopAllAudioExcept('title');
                     window.audios.title.loop = true;
                     window.audios.title.play();
-                } else if(newValue === 'intro') {
+                } else if (newValue === 'intro') {
                     this.stopAllAudioExcept('intro');
                     window.audios.intro.loop = true;
                     window.audios.intro.play();
-                } else if(newValue === 'state' || (oldValue === 'state' && newValue === 'success')) {
+                } else if (newValue === 'state' || (oldValue === 'state' && newValue === 'success')) {
                     let key = 'state' + this.stateIndex;
                     this.stopAllAudioExcept(key);
                     window.audios[key].loop = true;
                     window.audios[key].play();
-                } else if(newValue === 'win' || (oldValue === 'win' && newValue === 'welcome')) {
+                } else if (newValue === 'win' || (oldValue === 'win' && newValue === 'welcome')) {
                     this.stopAllAudioExcept('win');
                     window.audios.win.loop = true;
                     window.audios.win.play();
-                } else if(newValue === 'dead') {
+                } else if (newValue === 'dead') {
                     this.stopAllAudioExcept('dead');
                     window.audios.dead.loop = true;
                     window.audios.dead.play();
+                } else if (newValue === 'end') {
+                    this.stopAllAudioExcept('end');
+                    window.audios.end.loop = true;
+                    window.audios.end.play();
                 }
             }
         },
