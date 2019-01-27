@@ -248,7 +248,7 @@ document.addEventListener('preloaded', function () {
             },
             endMessage: function () {
                 return {
-                    de: 'Danke für deine Zeit!',
+                    de: 'Danke fürs spielen!',
                     en: 'Thank you for playing!',
                 }[this.locale];
             },
