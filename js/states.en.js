@@ -147,7 +147,45 @@ window.states.en = {
                 button: "Tell him about your favorite Gameboy game",
                 success: true,
                 message: "He knows some of the games and wonders about certain similarities. He likes to tell you the way to your clearing.",
+                next: 90,
+            },
+        }
+    },
+    90: {
+        situation: "This funny fellow likes to party and just comes from a rave. Already from afar you can hear him singing.",
+        gameOver: "You're in party mode and you're forgetting time. You don't come home like that.",
+        image: "img/9-partyshroom.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Take a bite out of him",
+                success: false,
+            },
+            2: {
+                id: 2,
+                button: "Ask him something about expansion of consciousness",
+                success: true,
+                message: "You guys start talking and he even knows Grandma Shroomson. She is by far the smartest in herbology.",
                 next: true,
+            },
+        }
+    },
+    300: {
+        situation: "Only great-grandfather Shroomson is a little confused. Shouldn't you be far away from your roots to expand the mushroom network?",
+        gameOver: null,
+        image: "img/30-grandpa.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Run fast away",
+                success: true,
+                next: null,
+            },
+            2: {
+                id: 2,
+                button: "Hide yourself",
+                success: true,
+                next: null,
             },
         }
     },

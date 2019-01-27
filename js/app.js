@@ -49,9 +49,14 @@ window.addEventListener('load', function () {
 
         function preloadAudio(url, key, callback) {
             let audio = new Audio();
-            audio.oncanplaythrough = callback;
+            if(!window.SmartPhone.isAny()) {
+                audio.oncanplaythrough = callback;
+            }
             audio.src = url;
             window.audios[key] = audio;
+            if(window.SmartPhone.isAny()) {
+                callback();
+            }
         }
     }
 
@@ -65,6 +70,8 @@ window.addEventListener('load', function () {
         'img/6-old-grandpa.png',
         'img/7-lady.png',
         'img/8-mario.png',
+        'img/9-partyshroom.png',
+        'img/30-grandpa.png',
 
         // char
         'img/chara-continue.gif',
@@ -85,6 +92,7 @@ window.addEventListener('load', function () {
         title: 'audio/title.mp3',
         intro: 'audio/intro.mp3',
         win: 'audio/win.mp3',
+        dead: 'audio/dead.mp3',
 
         // states
         state10: 'audio/1-fly.mp3',
@@ -95,6 +103,8 @@ window.addEventListener('load', function () {
         state60: 'audio/6-old-grandpa.mp3',
         state70: 'audio/7-lady.mp3',
         state80: 'audio/8-mario.mp3',
+        state90: 'audio/9-partyshroom.mp3',
+        state300: 'audio/30-grandpa.mp3',
     });
 });
 
@@ -103,7 +113,8 @@ document.addEventListener('preloaded', function () {
         el: '#ggj2019-app',
         data: {
             isDead: false,
-            isEnd: false,
+            isWin: false,
+            isWelcome: false,
             introIndex: null,
             stateIndex: null,
             actionIndex: null,
@@ -111,8 +122,10 @@ document.addEventListener('preloaded', function () {
         },
         computed: {
             screen: function () {
-                if (this.isEnd) {
-                    return 'end';
+                if (this.isWin) {
+                    return 'win';
+                } else if (this.isWelcome) {
+                    return 'welcome';
                 } else if (this.isDead) {
                     return 'dead';
                 } else if (this.introIndex === null && this.stateIndex === null) {
@@ -159,7 +172,13 @@ document.addEventListener('preloaded', function () {
                     en: 'the journey continues',
                 }[this.locale];
             },
-            endTitle: function () {
+            winMessage: function () {
+                return {
+                    de: 'Du hast den Weg zurück gefunden! Endlich betrittst du die lang ersehnte Lichtung und läufst zu deiner Familie. Sie empfängt Dich mit offenen Armen. Dir zu Ehren wird eine Gartenparty veranstaltet.',
+                    en: 'You found your way back! Finally you enter the long-awaited clearing and run to your family. It welcomes you with open arms. A garden party is held in your honour.',
+                }[this.locale];
+            },
+            welcomeTitle: function () {
                 return {
                     de: 'Willkommen zu Hause',
                     en: 'Welcome Home',
@@ -168,11 +187,20 @@ document.addEventListener('preloaded', function () {
         },
         methods: {
             resetGame: function () {
-                this.isEnd = false;
+                this.isWin = false;
+                this.isWelcome = false;
                 this.isDead = false;
                 this.introIndex = null;
                 this.stateIndex = null;
                 this.actionIndex = null;
+            },
+            toWelcome: function () {
+                this.resetGame();
+                this.isWelcome = true;
+            },
+            toSuspiciousGrandpa: function () {
+                this.resetGame();
+                this.stateIndex = 300;
             },
             startIntro: function () {
                 this.resetGame();
@@ -198,12 +226,16 @@ document.addEventListener('preloaded', function () {
                 if (!this.action.success) {
                     this.isDead = true;
                 }
+
+                if(this.action.next === null) {
+                    this.resetGame();
+                }
             },
             nextState: function () {
                 let next = this.action.next;
 
                 if (next === true) {
-                    this.isEnd = true;
+                    this.isWin = true;
                 } else {
                     this.stateIndex = next;
                 }
@@ -249,10 +281,14 @@ document.addEventListener('preloaded', function () {
                     this.stopAllAudioExcept(key);
                     window.audios[key].loop = true;
                     window.audios[key].play();
-                } else if(newValue === 'end') {
+                } else if(newValue === 'win' || (oldValue === 'win' && newValue === 'welcome')) {
                     this.stopAllAudioExcept('win');
                     window.audios.win.loop = true;
                     window.audios.win.play();
+                } else if(newValue === 'dead') {
+                    this.stopAllAudioExcept('dead');
+                    window.audios.dead.loop = true;
+                    window.audios.dead.play();
                 }
             }
         },
