@@ -166,6 +166,25 @@ window.states.en = {
                 button: "Ask him something about expansion of consciousness",
                 success: true,
                 message: "You guys start talking and he even knows Grandma Shroomson. She is by far the smartest in herbology.",
+                next: 100,
+            },
+        }
+    },
+    100: {
+        situation: "What did you do? The hotel owner is trembling with rage. He just wanted some new windows... But the tasty mushroom meat was too tempting for the two worker caterpillars.",
+        gameOver: "The caterpillars are now even hungrier and devour everything and everyone.",
+        image: "img/10-hotel.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Feed one of the caterpillars",
+                success: false,
+            },
+            2: {
+                id: 2,
+                button: "Count the worms and enlighten the hotel owner",
+                success: true,
+                message: "The hotel owner calls back the additional caterpillars and gives you a card.",
                 next: true,
             },
         }
