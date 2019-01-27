@@ -298,6 +298,10 @@ a.button:hover {
     font-size: 5rem;
 }
 
+#screen-end img {
+    height: 192px;
+}
+
 #screen-end p {
     text-align: center;
     font-size: 1.25rem;
