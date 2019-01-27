@@ -172,6 +172,7 @@ a.button:hover {
 
 #screen-intro h2 {
     margin: 0;
+    padding-top: 0;
     display: inline-block;
     position: relative;
     color: #ffffff;
@@ -297,6 +298,10 @@ a.button:hover {
     font-size: 5rem;
 }
 
+#screen-end img {
+    height: 192px;
+}
+
 #screen-end p {
     text-align: center;
     font-size: 1.25rem;
@@ -318,4 +323,96 @@ a.button:hover {
     padding: 0;
     margin: 3rem 0 0 0;
     text-shadow: 2px 2px rgba(255,255,255,0.75);
+}
+
+@media (min-width:1200px) {
+    /* screen TITLE */
+    #screen-title img {
+        position: absolute;
+        top: 50%;
+        margin: 0 !important;
+        height: 256px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #screen-title p {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* screen INTRO */
+    #screen-intro h2 {
+        font-size: 5rem;
+        padding-top: 0;
+    }
+    #screen-intro img {
+        position: absolute;
+        top: 50%;
+        margin: 0 !important;
+        height: 256px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* screen SUCCESS */
+    #screen-success h2 {
+        font-size: 5rem;
+        padding-top: 0;
+    }
+    #screen-success img {
+        position: absolute;
+        top: 50%;
+        margin: 0 !important;
+        height: 256px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #screen-success p {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* screen END */
+    #screen-end h2 {
+        font-size: 5rem;
+        padding-top: 0;
+    }
+    #screen-end img {
+        position: absolute;
+        top: 50%;
+        margin: 0 !important;
+        height: 256px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #screen-end p {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* screen DEAD */
+    #screen-dead h2 {
+        font-size: 5rem;
+        padding-top: 0;
+    }
+    #screen-dead img {
+        position: absolute;
+        top: 50%;
+        margin: 0 !important;
+        height: 256px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #screen-dead p {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

@@ -117,6 +117,7 @@ window.addEventListener('load', function () {
         'img/7-lady.png',
         'img/8-mario.png',
         'img/9-partyshroom.png',
+        'img/10-hotel.png',
         'img/30-grandpa.png',
 
         // char
@@ -153,6 +154,7 @@ window.addEventListener('load', function () {
         state70: 'audio/7-lady.mp3',
         state80: 'audio/8-mario.mp3',
         state90: 'audio/9-partyshroom.mp3',
+        state100: 'audio/10-hotel.mp3',
         state300: 'audio/30-grandpa.mp3',
     });
 
@@ -300,6 +302,8 @@ document.addEventListener('preloaded', function () {
                 } else if (this.action.next === null) {
                     this.toEnd();
                 } else {
+                    window.sfxs.continue.pause();
+                    window.sfxs.continue.currentTime = 0;
                     window.sfxs.continue.play();
                 }
             },

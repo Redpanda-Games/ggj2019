@@ -166,6 +166,25 @@ window.states.de = {
                 button: "Frage ihn etwas über Bewusstseinserweiterung",
                 success: true,
                 message: "Ihr kommt ins Gespräch und er kennt sogar Oma Shroomson. Sie ist mit Abstand die Schlauste in Kräuterkunde.",
+                next: 100,
+            },
+        }
+    },
+    100: {
+        situation: "Was habt ihr getan? Der Hotelbesitzer zittert vor Wut. Er wollte doch nur ein paar neue Fenster... Doch das leckere Pilzfleisch war zu verlockend für die zwei Arbeiter-Raupen.",
+        gameOver: "Die Raupen sind nun noch hungriger und verschlingen alles und jeden.",
+        image: "img/10-hotel.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Füttere eine der Raupen",
+                success: false,
+            },
+            2: {
+                id: 2,
+                button: "Zähle die Würmer und kläre den Hotelbesitzer auf",
+                success: true,
+                message: "Der Hotelbesitzer ruft die zusätzlichen Raupen zurück und gibt Dir eine Karte mit.",
                 next: true,
             },
         }
