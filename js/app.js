@@ -1,22 +1,57 @@
 window.intros = {};
 window.states = {};
+window.audios = {};
 
-window.addEventListener('load', function() {
-    function preloadImages(urls, allImagesLoadedCallback){
+window.addEventListener('load', function () {
+    let preloaded = {
+        audio: false,
+        image: false,
+    };
+
+    function allPreloaded() {
+        if(preloaded.audio && preloaded.image) {
+            document.dispatchEvent(new CustomEvent("preloaded"));
+        }
+    }
+
+    function preloadImages(urls) {
         let loadedCounter = 0;
         let toBeLoadedNumber = urls.length;
-        urls.forEach(function(url){
-            preloadImage(url, function(){
+        urls.forEach(function (url) {
+            preloadImage(url, function () {
                 loadedCounter++;
-                if(loadedCounter === toBeLoadedNumber){
-                    allImagesLoadedCallback();
+                if (loadedCounter === toBeLoadedNumber) {
+                    preloaded.image = true;
+                    allPreloaded();
                 }
             });
         });
-        function preloadImage(url, anImageLoadedCallback){
+
+        function preloadImage(url, callback) {
             let img = new Image();
-            img.onload = anImageLoadedCallback;
+            img.onload = callback;
             img.src = url;
+        }
+    }
+
+    function preloadAudios(urls) {
+        let loadedCounter = 0;
+        let toBeLoadedNumber = Object.keys(urls).length;
+        Object.keys(urls).forEach(function (key) {
+            preloadAudio(urls[key], key, function () {
+                loadedCounter++;
+                if (loadedCounter === toBeLoadedNumber) {
+                    preloaded.audio = true;
+                    allPreloaded();
+                }
+            });
+        });
+
+        function preloadAudio(url, key, callback) {
+            let audio = new Audio();
+            audio.oncanplaythrough = callback;
+            audio.src = url;
+            window.audios[key] = audio;
         }
     }
 
@@ -43,70 +78,27 @@ window.addEventListener('load', function() {
         // flags
         'img/flag-de.png',
         'img/flag-gb.png',
-    ], function() {
-        document.dispatchEvent(new CustomEvent("images-loaded"));
+    ]);
+
+    preloadAudios({
+        // screens
+        title: 'audio/title.mp3',
+        intro: 'audio/intro.mp3',
+        win: 'audio/win.mp3',
+
+        // states
+        state10: 'audio/1-fly.mp3',
+        state20: 'audio/2-snail.mp3',
+        state30: 'audio/3-bitey.mp3',
+        state40: 'audio/4-boobies.mp3',
+        state50: 'audio/5-glatze.mp3',
+        state60: 'audio/6-old-grandpa.mp3',
+        state70: 'audio/7-lady.mp3',
+        state80: 'audio/8-mario.mp3',
     });
 });
 
-document.addEventListener('images-loaded', function() {
-    Vue.component('fireflies', {
-        template: '<canvas id="fireflies"></canvas>',
-        mounted: function () {
-            window.FIREFLIES(this.$el);
-        }
-    });
-    Vue.component('slide-img', {
-        props: [
-            'src',
-            'duration',
-            'fps',
-        ],
-        data: {
-            interval: null,
-        },
-        template: '<div class="slide-img"></div>',
-        mounted: function () {
-            let el = this.$el;
-            el.style.backgroundImage = 'url('+this.src+')';
-            el.style.backgroundRepeat = 'no-repeat';
-            el.style.backgroundSize = 'auto 100vh';
-            el.style.backgroundPositionX = '0px';
-
-            let duration = this.duration;
-            let fps = this.fps;
-            let interval = 1000 / this.fps;
-            let containerWidth = this.$el.parentElement.clientWidth;
-            let image = new Image();
-            let frame = 0;
-            let frames = fps * duration;
-            let direction = 'left';
-            image.onload = function() {
-                let imageWidth = image.naturalWidth;
-                let distance = imageWidth - containerWidth;
-                if (distance > 100) {
-                    this.interval = setInterval(renderFrame, interval);
-                }
-                function renderFrame() {
-                    if(frame === frames) {
-                        direction = direction == 'left' ? 'right' : 'left';
-                        frame = 0;
-                    }
-
-                    if(direction == 'right') {
-                        el.style.backgroundPositionX = '-' + (1 / frames * (frames - frame)) * distance + 'px';
-                    } else {
-                        el.style.backgroundPositionX = '-' + (1 / frames * frame) * distance + 'px';
-                    }
-                    frame++;
-                }
-            };
-            image.src = this.src;
-        },
-        beforeDestroy: function () {
-            clearInterval(this.interval);
-        }
-    });
-
+document.addEventListener('preloaded', function () {
     window.game = new Vue({
         el: '#ggj2019-app',
         data: {
@@ -118,50 +110,50 @@ document.addEventListener('images-loaded', function() {
             locale: 'en',
         },
         computed: {
-            screen: function() {
-                if(this.isEnd) {
+            screen: function () {
+                if (this.isEnd) {
                     return 'end';
-                } else if(this.isDead) {
+                } else if (this.isDead) {
                     return 'dead';
-                } else if(this.introIndex === null && this.stateIndex === null) {
+                } else if (this.introIndex === null && this.stateIndex === null) {
                     return 'title';
-                } else if(this.introIndex !== null) {
+                } else if (this.introIndex !== null) {
                     return 'intro';
-                } else if(this.stateIndex && this.actionIndex === null) {
+                } else if (this.stateIndex && this.actionIndex === null) {
                     return 'state';
-                } else if(this.stateIndex && this.actionIndex) {
+                } else if (this.stateIndex && this.actionIndex) {
                     return 'success';
                 }
             },
-            intros: function() {
+            intros: function () {
                 return window.intros[this.locale];
             },
-            intro: function() {
-                if(this.introIndex) {
+            intro: function () {
+                if (this.introIndex) {
                     return this.intros[this.introIndex];
                 }
             },
-            states: function() {
+            states: function () {
                 return window.states[this.locale];
             },
-            state: function() {
+            state: function () {
                 return this.states[this.stateIndex];
             },
             action: function () {
-                if(this.actionIndex) {
+                if (this.actionIndex) {
                     return this.state.actions[this.actionIndex];
                 }
             },
-            transitionIntroKey: function() {
+            transitionIntroKey: function () {
                 return 'intro-' + this.introIndex;
             },
-            transitionStateKey: function() {
+            transitionStateKey: function () {
                 return 'state-' + this.stateIndex;
             },
-            transitionSuccessKey: function() {
+            transitionSuccessKey: function () {
                 return 'success-' + this.stateIndex;
             },
-            gameOverTitle: function() {
+            gameOverTitle: function () {
                 return {
                     de: 'die Reise geht weiter',
                     en: 'the journey continues',
@@ -175,42 +167,42 @@ document.addEventListener('images-loaded', function() {
             },
         },
         methods: {
-            resetGame: function() {
+            resetGame: function () {
                 this.isEnd = false;
                 this.isDead = false;
                 this.introIndex = null;
                 this.stateIndex = null;
                 this.actionIndex = null;
             },
-            startIntro: function() {
+            startIntro: function () {
                 this.resetGame();
                 this.introIndex = 1;
             },
-            nextIntro: function() {
+            nextIntro: function () {
                 this.introIndex++;
-                if(typeof this.intros[this.introIndex] === 'undefined') {
+                if (typeof this.intros[this.introIndex] === 'undefined') {
                     this.startGame();
                 }
             },
-            startGame: function() {
+            startGame: function () {
                 this.resetGame();
                 this.stateIndex = 10;
             },
-            doAction: function(event) {
+            doAction: function (event) {
                 let target = event.target;
-                if(target.nodeName === 'SPAN') {
+                if (target.nodeName === 'SPAN') {
                     target = target.parentElement;
                 }
                 this.actionIndex = parseInt(target.dataset.actionId);
 
-                if(!this.action.success) {
+                if (!this.action.success) {
                     this.isDead = true;
                 }
             },
             nextState: function () {
                 let next = this.action.next;
 
-                if(next === true) {
+                if (next === true) {
                     this.isEnd = true;
                 } else {
                     this.stateIndex = next;
@@ -221,7 +213,7 @@ document.addEventListener('images-loaded', function() {
             setLocale: function (event) {
                 this.locale = event.target.dataset.locale;
             },
-            toggleFullScreen: function(event) {
+            toggleFullScreen: function (event) {
                 if (!document.fullscreenElement) {
                     this.$el.requestFullscreen();
                     event.target.classList.add('active');
@@ -231,7 +223,42 @@ document.addEventListener('images-loaded', function() {
                         event.target.classList.remove('active');
                     }
                 }
+            },
+            stopAllAudioExcept: function (toPlay) {
+                Object.keys(window.audios).forEach(function(key) {
+                    if(key !== toPlay) {
+                        let audio = window.audios[key];
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                });
             }
+        },
+        watch: {
+            screen: function (newValue, oldValue) {
+                if(newValue === 'title') {
+                    this.stopAllAudioExcept('title');
+                    window.audios.title.loop = true;
+                    window.audios.title.play();
+                } else if(newValue === 'intro') {
+                    this.stopAllAudioExcept('intro');
+                    window.audios.intro.loop = true;
+                    window.audios.intro.play();
+                } else if(newValue === 'state' || (oldValue === 'state' && newValue === 'success')) {
+                    let key = 'state' + this.stateIndex;
+                    this.stopAllAudioExcept(key);
+                    window.audios[key].loop = true;
+                    window.audios[key].play();
+                } else if(newValue === 'end') {
+                    this.stopAllAudioExcept('win');
+                    window.audios.win.loop = true;
+                    window.audios.win.play();
+                }
+            }
+        },
+        mounted: function () {
+            window.audios.title.loop = true;
+            window.audios.title.play();
         }
     });
 }, false);

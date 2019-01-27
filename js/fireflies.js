@@ -1,3 +1,10 @@
+Vue.component('fireflies', {
+    template: '<canvas id="fireflies"></canvas>',
+    mounted: function () {
+        window.FIREFLIES(this.$el);
+    }
+});
+
 window.FIREFLIES = function (canvas) {
     let con;
     let g;
