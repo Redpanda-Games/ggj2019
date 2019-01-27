@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css?v=4">
-    <link rel="stylesheet" href="css/app.css?v=4">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=5">
+    <link rel="stylesheet" href="css/app.css?v=5">
 </head>
 <body>
 
@@ -31,13 +31,24 @@
 
 
     <transition name="fade">
-        <div id="screen-intro" v-if="screen == 'intro'" v-on:click="startGame" key="intro">
+        <div id="screen-title" v-if="screen == 'title'" v-on:click="startIntro" key="title">
             <div class="container">
                 <div class="text-center">
                     <h1>Bring Shroomi Home</h1>
                     <img src="img/chara-idle.gif" class="my-5"/>
                 </div>
                 <p class="text-light text-right m-0">Tom Witkowski<br/>Norman von Rechenberg</p>
+            </div>
+        </div>
+
+        <div id="screen-intro" v-if="screen == 'intro'" v-on:click="nextIntro" v-bind:key="transitionIntroKey">
+            <div class="container">
+                <div class="text-center">
+                    <div>
+                        <h2>{{ intro }}</h2>
+                    </div>
+                    <img src="img/chara-afraid.gif" class="my-5"/>
+                </div>
             </div>
         </div>
 
@@ -82,9 +93,11 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/firefly.js?v=4"></script>
-<script src="js/app.js?v=4"></script>
-<script src="js/data.en.js?v=4"></script>
-<script src="js/data.de.js?v=4"></script>
+<script src="js/firefly.js?v=5"></script>
+<script src="js/app.js?v=5"></script>
+<script src="js/intros.en.js?v=5"></script>
+<script src="js/intros.de.js?v=5"></script>
+<script src="js/states.en.js?v=5"></script>
+<script src="js/states.de.js?v=5"></script>
 </body>
 </html>

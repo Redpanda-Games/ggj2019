@@ -1,3 +1,4 @@
+window.intros = {};
 window.states = {};
 
 window.addEventListener('load', function() {
@@ -111,6 +112,7 @@ document.addEventListener('images-loaded', function() {
         data: {
             isDead: false,
             isEnd: false,
+            introIndex: null,
             stateIndex: null,
             actionIndex: null,
             locale: 'en',
@@ -121,12 +123,22 @@ document.addEventListener('images-loaded', function() {
                     return 'end';
                 } else if(this.isDead) {
                     return 'dead';
-                } else if(this.stateIndex === null) {
+                } else if(this.introIndex === null && this.stateIndex === null) {
+                    return 'title';
+                } else if(this.introIndex !== null) {
                     return 'intro';
                 } else if(this.stateIndex && this.actionIndex === null) {
                     return 'state';
                 } else if(this.stateIndex && this.actionIndex) {
                     return 'success';
+                }
+            },
+            intros: function() {
+                return window.intros[this.locale];
+            },
+            intro: function() {
+                if(this.introIndex) {
+                    return this.intros[this.introIndex];
                 }
             },
             states: function() {
@@ -139,6 +151,9 @@ document.addEventListener('images-loaded', function() {
                 if(this.actionIndex) {
                     return this.state.actions[this.actionIndex];
                 }
+            },
+            transitionIntroKey: function() {
+                return 'intro-' + this.introIndex;
             },
             transitionStateKey: function() {
                 return 'state-' + this.stateIndex;
@@ -163,14 +178,23 @@ document.addEventListener('images-loaded', function() {
             resetGame: function() {
                 this.isEnd = false;
                 this.isDead = false;
+                this.introIndex = null;
                 this.stateIndex = null;
                 this.actionIndex = null;
             },
+            startIntro: function() {
+                this.resetGame();
+                this.introIndex = 1;
+            },
+            nextIntro: function() {
+                this.introIndex++;
+                if(typeof this.intros[this.introIndex] === 'undefined') {
+                    this.startGame();
+                }
+            },
             startGame: function() {
-                this.isEnd = false;
-                this.isDead = false;
+                this.resetGame();
                 this.stateIndex = 10;
-                this.actionIndex = null;
             },
             doAction: function(event) {
                 let target = event.target;
