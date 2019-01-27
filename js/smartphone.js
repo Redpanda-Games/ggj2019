@@ -86,12 +86,12 @@ window.SmartPhone.isPalm = function () {
 };
 
 window.SmartPhone.isAny = function () {
-    var foundAny = false;
-    var getAllMethods = Object.getOwnPropertyNames(SmartPhone).filter(function (property) {
-        return typeof SmartPhone[property] == 'function';
+    let foundAny = false;
+    let getAllMethods = Object.getOwnPropertyNames(SmartPhone).filter(function (property) {
+        return typeof SmartPhone[property] === 'function';
     });
 
-    for (var index in getAllMethods) {
+    for (let index in getAllMethods) {
         if (getAllMethods[index] === 'setUserAgent' || getAllMethods[index] === 'getUserAgent' ||
             getAllMethods[index] === 'isAny' || getAllMethods[index] === 'isWindows' ||
             getAllMethods[index] === 'isIOS') {
