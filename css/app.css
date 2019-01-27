@@ -55,6 +55,7 @@ a.button:hover {
     color: #000000;
     border-style: solid;
     font-style: italic;
+    background: #ffffff;
 }
 
 #fireflies {
@@ -85,6 +86,25 @@ a.button:hover {
     display: block;
     cursor: pointer;
     height: 1rem;
+}
+
+#toolbar .mute {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/music.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    cursor: pointer;
+    opacity: 1;
+}
+#toolbar .mute:hover,
+#toolbar .mute.active {
+    opacity: 0.75;
+}
+#toolbar .mute.active:hover {
+    opacity: 1;
 }
 
 #toolbar .full-screen {

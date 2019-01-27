@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css?v=8">
-    <link rel="stylesheet" href="css/app.css?v=8">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=9">
+    <link rel="stylesheet" href="css/app.css?v=9">
 </head>
 <body>
 
@@ -20,6 +20,9 @@
             </li>
             <li class="list-inline-item">
                 <img src="img/flag-gb.png" v-on:click="setLocale" data-locale="en" />
+            </li>
+            <li class="list-inline-item">
+                <span class="mute" v-on:click="toggleMute"></span>
             </li>
             <li class="list-inline-item">
                 <span class="full-screen" v-on:click="toggleFullScreen"></span>
@@ -37,7 +40,7 @@
                     <h1>Bring Shroomi Home</h1>
                     <img src="img/chara-idle.gif" class="my-5"/>
                 </div>
-                <p class="text-light text-right m-0">Tom Witkowski<br/>Norman von Rechenberg</p>
+                <p class="text-light text-center m-0">A game by Tom Witkowski & Norman von Rechenberg</p>
             </div>
         </div>
 
@@ -118,13 +121,13 @@
 <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/smartphone.js?v=8"></script>
-<script src="js/fireflies.js?v=8"></script>
-<script src="js/slideimg.js?v=8"></script>
-<script src="js/app.js?v=8"></script>
-<script src="js/intros.en.js?v=8"></script>
-<script src="js/intros.de.js?v=8"></script>
-<script src="js/states.en.js?v=8"></script>
-<script src="js/states.de.js?v=8"></script>
+<script src="js/smartphone.js?v=9"></script>
+<script src="js/fireflies.js?v=9"></script>
+<script src="js/slideimg.js?v=9"></script>
+<script src="js/app.js?v=9"></script>
+<script src="js/intros.en.js?v=9"></script>
+<script src="js/intros.de.js?v=9"></script>
+<script src="js/states.en.js?v=9"></script>
+<script src="js/states.de.js?v=9"></script>
 </body>
 </html>

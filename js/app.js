@@ -1,15 +1,17 @@
 window.intros = {};
 window.states = {};
 window.audios = {};
+window.sfxs = {};
 
 window.addEventListener('load', function () {
     let preloaded = {
-        audio: false,
         image: false,
+        audio: false,
+        sfxs: false,
     };
 
     function allPreloaded() {
-        if(preloaded.audio && preloaded.image) {
+        if(preloaded.sfxs &&preloaded.audio && preloaded.image) {
             document.dispatchEvent(new CustomEvent("preloaded"));
         }
     }
@@ -53,7 +55,35 @@ window.addEventListener('load', function () {
                 audio.oncanplaythrough = callback;
             }
             audio.src = url;
+            audio.muted = false;
             window.audios[key] = audio;
+            if(window.SmartPhone.isAny()) {
+                callback();
+            }
+        }
+    }
+
+    function preloadSfxs(urls) {
+        let loadedCounter = 0;
+        let toBeLoadedNumber = Object.keys(urls).length;
+        Object.keys(urls).forEach(function (key) {
+            preloadSfx(urls[key], key, function () {
+                loadedCounter++;
+                if (loadedCounter === toBeLoadedNumber) {
+                    preloaded.sfxs = true;
+                    allPreloaded();
+                }
+            });
+        });
+
+        function preloadSfx(url, key, callback) {
+            let audio = new Audio();
+            if(!window.SmartPhone.isAny()) {
+                audio.oncanplaythrough = callback;
+            }
+            audio.src = url;
+            audio.muted = false;
+            window.sfxs[key] = audio;
             if(window.SmartPhone.isAny()) {
                 callback();
             }
@@ -108,6 +138,11 @@ window.addEventListener('load', function () {
         state80: 'audio/8-mario.mp3',
         state90: 'audio/9-partyshroom.mp3',
         state300: 'audio/30-grandpa.mp3',
+    });
+
+    preloadSfxs({
+        continue: 'audio/continue.mp3',
+        gameOver: 'audio/game-over.mp3',
     });
 });
 
@@ -242,10 +277,11 @@ document.addEventListener('preloaded', function () {
 
                 if (!this.action.success) {
                     this.isDead = true;
-                }
-
-                if(this.action.next === null) {
+                    window.sfxs.gameOver.play();
+                } else if(this.action.next === null) {
                     this.toEnd();
+                } else {
+                    window.sfxs.continue.play();
                 }
             },
             nextState: function () {
@@ -281,6 +317,15 @@ document.addEventListener('preloaded', function () {
                         audio.currentTime = 0;
                     }
                 });
+            },
+            toggleMute: function (event) {
+                Object.values(window.audios).forEach(function(audio) {
+                    audio.muted = !audio.muted;
+                });
+                Object.values(window.sfxs).forEach(function(audio) {
+                    audio.muted = !audio.muted;
+                });
+                event.target.classList.toggle('active');
             }
         },
         watch: {
