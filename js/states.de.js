@@ -182,9 +182,9 @@ window.states.de = {
             },
             2: {
                 id: 2,
-                button: "Zähle die Würmer und kläre den Hotelbesitzer auf",
+                button: "Verlange den Vorarbeiter zu sprechen",
                 success: true,
-                message: "Der Hotelbesitzer ruft die zusätzlichen Raupen zurück und gibt Dir eine Karte mit.",
+                message: "Der Vorarbeiter ruft die zusätzlichen Raupen zurück. Der Hotelbesitzer ist hoch erfreut und gibt Dir eine Karte mit.",
                 next: true,
             },
         }

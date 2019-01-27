@@ -182,9 +182,9 @@ window.states.en = {
             },
             2: {
                 id: 2,
-                button: "Count the worms and enlighten the hotel owner",
+                button: "Ask to speak to the foreman",
                 success: true,
-                message: "The hotel owner calls back the additional caterpillars and gives you a card.",
+                message: "The foreman calls back the extra caterpillars. The hotel owner is delighted and gives you a card.",
                 next: true,
             },
         }
