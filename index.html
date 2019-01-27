@@ -35,21 +35,17 @@
 
     <transition name="fade">
         <div id="screen-title" v-if="screen == 'title'" v-on:click="startIntro" key="title">
-            <div class="container">
-                <div class="text-center">
-                    <h1>Bring Shroomi Home</h1>
-                    <img src="img/chara-idle.gif" class="my-5"/>
-                </div>
-                <p class="text-light text-center m-0">A game by Tom Witkowski & Norman von Rechenberg</p>
+            <div class="container text-center">
+                <h1>Bring Shroomi Home</h1>
+                <img src="img/chara-idle.gif" class="my-5"/>
+                <p class="text-light m-0 container">A game by Tom Witkowski & Norman von Rechenberg</p>
             </div>
         </div>
 
         <div id="screen-intro" v-if="screen == 'intro'" v-on:click="nextIntro" v-bind:key="transitionIntroKey">
             <div class="container">
                 <div class="text-center">
-                    <div>
-                        <h2>{{ intro }}</h2>
-                    </div>
+                    <h2>{{ intro }}</h2>
                     <img src="img/chara-afraid.gif" class="my-5"/>
                 </div>
             </div>
@@ -68,12 +64,10 @@
         </div>
 
         <div id="screen-success" v-if="screen == 'success'" v-on:click="nextState" v-bind:key="transitionSuccessKey">
-            <div class="container">
+            <div class="container text-center">
                 <h2 class="text-light">{{ gameOverTitle }}</h2>
-                <div class="text-center">
-                    <img src="img/chara-continue.gif" class="img-fluid pixelate my-5" />
-                </div>
-                <p class="text-light">{{ action.message }}</p>
+                <img src="img/chara-continue.gif" class="img-fluid pixelate my-5" />
+                <p class="text-light container">{{ action.message }}</p>
             </div>
         </div>
 
@@ -96,22 +90,18 @@
         </div>
 
         <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame" key="end">
-            <div class="container">
+            <div class="container text-center">
                 <h2 class="text-light">The End</h2>
-                <div class="text-center">
-                    <img src="img/chara-herz.gif" class="img-fluid pixelate mb-5" style="height: 192px" />
-                </div>
-                <p class="text-light">{{ endMessage }}</p>
+                <img src="img/chara-herz.gif" class="img-fluid pixelate mb-5" style="height: 192px" />
+                <p class="text-light container">{{ endMessage }}</p>
             </div>
         </div>
 
         <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame" key="dead">
-            <div class="container">
+            <div class="container text-center">
                 <h2 class="text-dark">you died</h2>
-                <div class="text-center">
-                    <img src="img/game-over.png" class="img-fluid" />
-                </div>
-                <p class="text-dark">{{ state.gameOver }}</p>
+                <img src="img/game-over.png" class="img-fluid" />
+                <p class="text-dark container">{{ state.gameOver }}</p>
             </div>
         </div>
     </transition>
