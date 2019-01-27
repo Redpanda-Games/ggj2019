@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GGJ2019</title>
+    <title>Bring Shroomi Home - GGJ2019</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css?v=5">
-    <link rel="stylesheet" href="css/app.css?v=5">
+    <link rel="stylesheet" href="css/bootstrap.min.css?v=8">
+    <link rel="stylesheet" href="css/app.css?v=8">
 </head>
 <body>
 
-<div id="ggj2019-app" class="clearfix" v-cloak>
+<div id="ggj2019-app" v-bind:class="screen" v-cloak>
 
     <div id="toolbar">
         <ul class="list-inline">
@@ -74,14 +74,27 @@
             </div>
         </div>
 
-        <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame" key="end">
-            <p class="text-dark">{{ endTitle }}</p>
+        <div id="screen-win" v-if="screen == 'win'" v-on:click="toWelcome" key="win">
+            <div class="container">
+                <p class="text-light">{{ winMessage }}</p>
+            </div>
+            <div class="text-center">
+                <img src="img/chara-continue.gif" class="img-fluid pixelate" />
+            </div>
+            <img src="img/win.jpg" class="h-100" />
+        </div>
+
+        <div id="screen-welcome" v-if="screen == 'welcome'" v-on:click="toSuspiciousGrandpa" key="welcome">
+            <h2>{{ welcomeTitle }}</h2>
+            <div class="text-center">
+                <img src="img/chara-continue.gif" class="img-fluid pixelate" />
+            </div>
             <slide-img src="img/win.jpg" duration="10" fps="30"></slide-img>
         </div>
 
         <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame" key="dead">
             <div class="container">
-                <h2>you died</h2>
+                <h2 class="text-dark">you died</h2>
                 <div class="text-center">
                     <img src="img/game-over.png" class="img-fluid" />
                 </div>
@@ -95,12 +108,13 @@
 <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
-<script src="js/fireflies.js?v=5"></script>
-<script src="js/slideimg.js?v=5"></script>
-<script src="js/app.js?v=5"></script>
-<script src="js/intros.en.js?v=5"></script>
-<script src="js/intros.de.js?v=5"></script>
-<script src="js/states.en.js?v=5"></script>
-<script src="js/states.de.js?v=5"></script>
+<script src="js/smartphone.js?v=8"></script>
+<script src="js/fireflies.js?v=8"></script>
+<script src="js/slideimg.js?v=8"></script>
+<script src="js/app.js?v=8"></script>
+<script src="js/intros.en.js?v=8"></script>
+<script src="js/intros.de.js?v=8"></script>
+<script src="js/states.en.js?v=8"></script>
+<script src="js/states.de.js?v=8"></script>
 </body>
 </html>

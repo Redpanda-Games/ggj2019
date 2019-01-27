@@ -147,7 +147,45 @@ window.states.de = {
                 button: "Erzähl ihm von Deinem Lieblings Gameboy Spiel",
                 success: true,
                 message: "Er kennt einige der Spiele und wundert sich über gewisse Ähnlichkeiten. Den Weg zu Deiner Lichtung sagt er Dir gern.",
+                next: 90,
+            },
+        }
+    },
+    90: {
+        situation: "Dieser lustige Geselle macht gern Party und kommt gerade von einem Rave. Schon von Weitem hörst du ihn singen.",
+        gameOver: "Du bist im Party Mode und vergisst die Zeit. So kommst du nicht nach Hause.",
+        image: "img/9-partyshroom.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Nimm einen Happen von ihm",
+                success: false,
+            },
+            2: {
+                id: 2,
+                button: "Frage ihn etwas über Bewusstseinserweiterung",
+                success: true,
+                message: "Ihr kommt ins Gespräch und er kennt sogar Oma Shroomson. Sie ist mit Abstand die Schlauste in Kräuterkunde.",
                 next: true,
+            },
+        }
+    },
+    300: {
+        situation: "Einzig Urgroßvater Shroomson ist etwas verwirrt. Solltest du nicht in der Ferne deine Wurzeln aufschlagen um das Pilznetzwerk zu vergrößern?",
+        gameOver: null,
+        image: "img/30-grandpa.png",
+        actions: {
+            1: {
+                id: 1,
+                button: "Lauf schnell weg",
+                success: true,
+                next: null,
+            },
+            2: {
+                id: 2,
+                button: "Versteck dich",
+                success: true,
+                next: null,
             },
         }
     },
