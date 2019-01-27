@@ -302,6 +302,8 @@ document.addEventListener('preloaded', function () {
                 } else if (this.action.next === null) {
                     this.toEnd();
                 } else {
+                    window.sfxs.continue.pause();
+                    window.sfxs.continue.currentTime = 0;
                     window.sfxs.continue.play();
                 }
             },
