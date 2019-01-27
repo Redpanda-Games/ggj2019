@@ -60,7 +60,7 @@
                 <img v-bind:src="state.image" class="img-fluid" />
                 <p class="text-dark">{{ state.situation }}</p>
                 <div class="row">
-                    <div class="col-12 col-md-6" v-for="action in state.actions">
+                    <div class="col-12 col-md-6" v-for="action in actions">
                         <a href="#" v-on:click="doAction" v-bind:data-action-id="action.id" class="mb-3 mb-md-0 button">{{ action.button }}</a>
                     </div>
                 </div>
