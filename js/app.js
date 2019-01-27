@@ -76,6 +76,8 @@ window.addEventListener('load', function () {
         // char
         'img/chara-continue.gif',
         'img/chara-idle.gif',
+        'img/chara-herz.gif',
+        'img/chara-afraid.gif',
 
         // assets
         'img/game-over.png',
@@ -93,6 +95,7 @@ window.addEventListener('load', function () {
         intro: 'audio/intro.mp3',
         win: 'audio/win.mp3',
         dead: 'audio/dead.mp3',
+        end: 'audio/end.mp3',
 
         // states
         state10: 'audio/1-fly.mp3',
@@ -115,6 +118,7 @@ document.addEventListener('preloaded', function () {
             isDead: false,
             isWin: false,
             isWelcome: false,
+            isEnd: false,
             introIndex: null,
             stateIndex: null,
             actionIndex: null,
@@ -126,6 +130,8 @@ document.addEventListener('preloaded', function () {
                     return 'win';
                 } else if (this.isWelcome) {
                     return 'welcome';
+                } else if (this.isEnd) {
+                    return 'end';
                 } else if (this.isDead) {
                     return 'dead';
                 } else if (this.introIndex === null && this.stateIndex === null) {
@@ -184,11 +190,18 @@ document.addEventListener('preloaded', function () {
                     en: 'Welcome Home',
                 }[this.locale];
             },
+            endMessage: function () {
+                return {
+                    de: 'Danke für deine Zeit!',
+                    en: 'Thank you for playing!',
+                }[this.locale];
+            },
         },
         methods: {
             resetGame: function () {
                 this.isWin = false;
                 this.isWelcome = false;
+                this.isEnd = false;
                 this.isDead = false;
                 this.introIndex = null;
                 this.stateIndex = null;
@@ -197,6 +210,10 @@ document.addEventListener('preloaded', function () {
             toWelcome: function () {
                 this.resetGame();
                 this.isWelcome = true;
+            },
+            toEnd: function () {
+                this.resetGame();
+                this.isEnd = true;
             },
             toSuspiciousGrandpa: function () {
                 this.resetGame();
@@ -228,7 +245,7 @@ document.addEventListener('preloaded', function () {
                 }
 
                 if(this.action.next === null) {
-                    this.resetGame();
+                    this.toEnd();
                 }
             },
             nextState: function () {
@@ -289,6 +306,10 @@ document.addEventListener('preloaded', function () {
                     this.stopAllAudioExcept('dead');
                     window.audios.dead.loop = true;
                     window.audios.dead.play();
+                } else if(newValue === 'end') {
+                    this.stopAllAudioExcept('end');
+                    window.audios.end.loop = true;
+                    window.audios.end.play();
                 }
             }
         },

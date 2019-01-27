@@ -92,6 +92,16 @@
             <slide-img src="img/win.jpg" duration="10" fps="30"></slide-img>
         </div>
 
+        <div id="screen-end" v-if="screen == 'end'" v-on:click="resetGame" key="end">
+            <div class="container">
+                <h2 class="text-light">The End</h2>
+                <div class="text-center">
+                    <img src="img/chara-herz.gif" class="img-fluid pixelate mb-5" style="height: 192px" />
+                </div>
+                <p class="text-light">{{ endMessage }}</p>
+            </div>
+        </div>
+
         <div id="screen-dead" v-if="screen == 'dead'" v-on:click="resetGame" key="dead">
             <div class="container">
                 <h2 class="text-dark">you died</h2>

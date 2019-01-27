@@ -266,6 +266,25 @@ a.button:hover {
     width: 100vw;
 }
 
+/* screen END */
+#screen-end {
+    cursor: pointer;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+#screen-end h2 {
+    font-size: 5rem;
+}
+
+#screen-end p {
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-shadow: 2px 2px #000000;
+}
+
 /* screen DEAD */
 #screen-dead {
     cursor: pointer;
