@@ -130,6 +130,10 @@ a.button:hover {
     z-index: 100;
     min-height: 100vh;
     min-width: 100vw;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
 }
 
 [id^=screen-] h2 {
