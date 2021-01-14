@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "deploy": "surge . ggj2019-rg.surge.sh"
+  }
+}
